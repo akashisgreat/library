@@ -366,16 +366,16 @@ tree --noreport -X -P '*.pdf' -o data.xml Class_6-12/
     });
 
     //  Save the sstatus of pdfjs toggle button
-    const storageKey = 'pdfjspath_toggle_status';
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedStatus = localStorage.getItem(storageKey);
-      if (savedStatus !== null) {
-        pdfjspath_toggle.checked = savedStatus === 'false';
-      }
-    });
-    pdfjspath_toggle.addEventListener('change', () => {
-      localStorage.setItem(storageKey, pdfjspath_toggle.checked);
-    });
+    // const storageKey = 'pdfjspath_toggle_status';
+    // window.addEventListener('DOMContentLoaded', () => {
+    //   const savedStatus = localStorage.getItem(storageKey);
+    //   if (savedStatus !== null) {
+    //     pdfjspath_toggle.checked = savedStatus === 'false';
+    //   }
+    // });
+    // pdfjspath_toggle.addEventListener('change', () => {
+    //   localStorage.setItem(storageKey, pdfjspath_toggle.checked);
+    // });
   </script>
 </body>
 
