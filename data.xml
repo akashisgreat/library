@@ -379,4 +379,25 @@
       </directory>
     </directory>
   </directory>
+  <directory name="NonTech">
+    <directory name="0_Syllabus">
+      <file name="0_Competition_syllabus.pdf"></file>
+    </directory>
+    <directory name="Other">
+      <file name="CBSE_Mental_Health_Manual [manodarpan.education.gov.in].pdf"></file>
+      <file name="Constitution of India_English.pdf"></file>
+      <file name="Play with Graphs by Amit M Aggarwal.pdf"></file>
+    </directory>
+    <directory name="SSC_CGL">
+      <file name="151 ESSAYS - Arihant Publications- By EasyEngineering.net.pdf"></file>
+      <file name="Blackbook English MARCH-2023.pdf"></file>
+      <file name="Gopal Verma English Acumen Book.pdf"></file>
+      <file name="Maths Concept Book Gagan Pratap Sir .pdf"></file>
+      <file name="Reasoning-Book-Piyush-Sir.pdf"></file>
+    </directory>
+    <directory name="Standard_books">
+      <file name="Quantitative_Aptitude_for_Competitive_Examinations_by_R_S_Aggarwal.pdf"></file>
+      <file name="Samanya-hindi-by-lucent-publication.pdf"></file>
+    </directory>
+  </directory>
 </tree>
