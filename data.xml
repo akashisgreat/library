@@ -299,10 +299,6 @@
       <directory name="1.Intro">
         <file name="Intro_CE-By-NPTEL_export.pdf"></file>
         <file name="Intro_CE-By-NPTEL.pdf"></file>
-        <directory name="old">
-          <file name="Intro_CE-By-NPTEL_export.pdf"></file>
-          <file name="Intro_CE-By-NPTEL.pdf"></file>
-        </directory>
       </directory>
       <directory name="Books">
         <file name="Building Materials by S.K Duggal.pdf"></file>
@@ -322,7 +318,9 @@
         <file name="Surveying Volume 2 (B.C Punmia).pdf"></file>
       </directory>
       <directory name="Practice">
-        <file name="BTSC_JE_Civil_Engineering_Solved_Papers_&amp;_Practice_Book_2025.pdf"></file>
+        <directory name="BTSC">
+          <file name="BTSC_JE_Civil_Engineering_Solved_Papers_&amp;_Practice_Book_2025.pdf"></file>
+        </directory>
         <directory name="Capsule">
           <file name="civil capsule.pdf"></file>
           <file name="Civil Engineering Capsule.pdf"></file>
@@ -341,7 +339,7 @@
           <file name="RCC BAR CODE NOTES.pdf"></file>
           <file name="Soil - First Unit 2.pdf"></file>
         </directory>
-        <directory name="SSC JE">
+        <directory name="SSCJE">
           <file name="GPSC AE 4 MARCH 2017 WITH KEY.pdf"></file>
           <file name="GPSC AE 4 MARCH 2018 CIVIL PAPER WITH KEY (Civil Junction) .pdf"></file>
           <file name="IES master SSC JE mains PYQ.pdf"></file>
