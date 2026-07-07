@@ -90,16 +90,36 @@ const repo = "library";
 let branch = "main";
 let allFiles = [];
 
+/* Files to hide */
+const hiddenFiles = [
+  "index.html"
+];
+
 /* LOAD FILES */
 async function loadFiles() {
-  const repoData = await fetch(`https://api.github.com/repos/${user}/${repo}`).then(r => r.json());
+  const repoData = await fetch(
+    `https://api.github.com/repos/${user}/${repo}`
+  ).then(r => r.json());
+
   branch = repoData.default_branch;
 
   const treeData = await fetch(
     `https://api.github.com/repos/${user}/${repo}/git/trees/${branch}?recursive=1`
   ).then(r => r.json());
 
-  allFiles = treeData.tree.filter(i => i.type === "blob");
+  allFiles = treeData.tree.filter(item => {
+    if (item.type !== "blob") return false;
+
+    const filename = item.path.split("/").pop().toLowerCase();
+
+    // Hide all dotfiles
+    if (filename.startsWith(".")) return false;
+
+    // Hide specific files
+    if (hiddenFiles.includes(filename)) return false;
+
+    return true;
+  });
 
   renderTree(buildTree(allFiles), document.getElementById("tree"));
 }
@@ -109,17 +129,17 @@ function buildTree(files) {
   const root = {};
 
   files.forEach(file => {
-    const parts = file.path.split('/');
+    const parts = file.path.split("/");
     let cur = root;
 
-    parts.forEach((p, i) => {
-      if (!cur[p]) {
-        cur[p] = {
+    parts.forEach((part, index) => {
+      if (!cur[part]) {
+        cur[part] = {
           __children: {},
-          __file: i === parts.length - 1
+          __file: index === parts.length - 1
         };
       }
-      cur = cur[p].__children;
+      cur = cur[part].__children;
     });
   });
 
@@ -130,7 +150,7 @@ function buildTree(files) {
 function renderTree(obj, container, basePath = "") {
   container.innerHTML = "";
 
-  Object.keys(obj).forEach(name => {
+  Object.keys(obj).sort().forEach(name => {
     const fullPath = basePath ? `${basePath}/${name}` : name;
 
     const node = document.createElement("div");
@@ -149,6 +169,7 @@ function renderTree(obj, container, basePath = "") {
     item.appendChild(label);
 
     if (!obj[name].__file) {
+
       node.appendChild(item);
 
       const children = document.createElement("div");
@@ -157,16 +178,17 @@ function renderTree(obj, container, basePath = "") {
       item.onclick = () => node.classList.toggle("open");
 
       renderTree(obj[name].__children, children, fullPath);
+
       node.appendChild(children);
 
     } else {
+
       const link = document.createElement("a");
 
       let url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${fullPath}`;
 
-      // Optional: PDF viewer
-      if (fullPath.endsWith(".pdf")) {
-        url = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${url}`;
+      if (fullPath.toLowerCase().endsWith(".pdf")) {
+        url = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(url)}`;
       }
 
       link.href = url;
@@ -191,12 +213,15 @@ document.getElementById("search").addEventListener("input", function () {
     return;
   }
 
-  const filtered = allFiles.filter(f => f.path.toLowerCase().includes(q));
+  const filtered = allFiles.filter(file =>
+    file.path.toLowerCase().includes(q)
+  );
+
   renderTree(buildTree(filtered), document.getElementById("tree"));
 
-  // auto expand
-  document.querySelectorAll(".children").forEach(c => {
-    c.style.display = "block";
+  // Auto-expand search results
+  document.querySelectorAll(".children").forEach(child => {
+    child.style.display = "block";
   });
 });
 
